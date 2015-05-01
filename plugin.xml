@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * Copyright (c) 2014,2015 Oliver Goguel - o@goguel.com
+ * Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+ -->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="capptain-cordova" version="1.0.3">
+
+    <name>Cordova plugin for Capptain</name>
+    <description>Cordova plugin for Capptain</description>
+    <keywords>cordova,capptain</keywords>
+
+    <author>Olivier Goguel</author>
+    <license>Apache 2.0</license>
+
+    <js-module src="www/Capptain.js" name="Capptain">
+           <clobbers target="Capptain" />
+    </js-module>
+    
+    <!-- android -->
+    <platform name="android">
+
+		<preference name="CAPPTAIN_ANDROID_GOOGLE_PROJECT_NUMBER" />
+    	<preference name="CAPPTAIN_ANDROID_APP_ID" />
+		<preference name="CAPPTAIN_ANDROID_REACH_ICON" />
+		<preference name="CAPPTAIN_REDIRECT_URL" />
+		<preference name="CAPPTAIN_ENABLE_LOG" />
+
+        <config-file target="res/xml/config.xml" parent="plugins">
+             <feature name="Capptain">
+                <param name="android-package" value="com.del7a.capptain.Capptain" />
+                  <param name="onload" value="true" />
+             </feature>
+        </config-file>
+        
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<meta-data android:name="capptain:appId" android:value="$CAPPTAIN_ANDROID_APP_ID"/>
+			<meta-data android:name="capptain:reach:notification:icon" android:value="$CAPPTAIN_ANDROID_REACH_ICON" />
+
+			<!-- If only 1 sender, don't forget the \n, otherwise it will be parsed as a negative number... -->
+			<meta-data android:name="capptain:gcm:sender" android:value="$CAPPTAIN_ANDROID_GOOGLE_PROJECT_NUMBER\n" />
+			<service android:name="com.ubikod.capptain.android.service.CapptainService" 
+					 android:label="$PACKAGE_NAME-Service" android:process=":Capptain">
+				  <meta-data android:name="capptain:log:test" android:value="$CAPPTAIN_ENABLE_LOG" />
+				  <intent-filter>
+				    <category android:name="android.intent.category.DEFAULT" />
+				    <action android:name="com.ubikod.capptain.ICapptainService" />
+				    <data android:scheme="capptain" />
+				  </intent-filter>
+				<meta-data android:name="capptain:api:level" android:value="24" />
+				<meta-data android:name="capptain:api:id" android:value="b6a5b1113175bf391e442a8653876b84" />
+			</service>
+			<activity android:name="com.ubikod.capptain.android.sdk.reach.activity.CapptainTextAnnouncementActivity" android:theme="@android:style/Theme.Light">
+				  <intent-filter>
+				    <action android:name="com.ubikod.capptain.intent.action.ANNOUNCEMENT"/>
+				    <category android:name="android.intent.category.DEFAULT" />
+				    <data android:mimeType="text/plain" />
+				  </intent-filter>
+			</activity>
+			<activity android:name="com.ubikod.capptain.android.sdk.reach.activity.CapptainWebAnnouncementActivity" android:theme="@android:style/Theme.Light">
+				  <intent-filter>
+				    <action android:name="com.ubikod.capptain.intent.action.ANNOUNCEMENT"/>
+				    <category android:name="android.intent.category.DEFAULT" />
+				    <data android:mimeType="text/html" />
+				  </intent-filter>
+			</activity>
+			<activity android:name="com.ubikod.capptain.android.sdk.reach.activity.CapptainPollActivity" android:theme="@android:style/Theme.Light">
+				  <intent-filter>
+				    <action android:name="com.ubikod.capptain.intent.action.POLL"/>
+				    <category android:name="android.intent.category.DEFAULT" />
+				  </intent-filter>
+			</activity>
+			<receiver android:name="com.ubikod.capptain.android.sdk.reach.CapptainReachReceiver">
+				  <intent-filter>
+				    <action android:name="android.intent.action.BOOT_COMPLETED"/>
+				    <action android:name="com.ubikod.capptain.intent.action.AGENT_CREATED"/>
+				    <action android:name="com.ubikod.capptain.intent.action.MESSAGE"/>
+				    <action android:name="com.ubikod.capptain.reach.intent.action.ACTION_NOTIFICATION"/>
+				    <action android:name="com.ubikod.capptain.reach.intent.action.EXIT_NOTIFICATION"/>
+				    <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+				    <action android:name="com.ubikod.capptain.reach.intent.action.DOWNLOAD_TIMEOUT"/>
+				  </intent-filter>
+			</receiver>
+			<receiver android:name="com.ubikod.capptain.android.sdk.gcm.CapptainGCMEnabler">
+			  <intent-filter>
+			    <action android:name="com.ubikod.capptain.intent.action.APPID_GOT" />
+			  </intent-filter>
+			</receiver>
+
+			<receiver android:name="com.ubikod.capptain.android.sdk.gcm.CapptainGCMReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+			  <intent-filter>
+			    <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+			    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+			    <category android:name="$PACKAGE_NAME" />
+			  </intent-filter>
+			</receiver>
+
+		</config-file>
+    
+    	<config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
+    		<intent-filter>   
+					<action android:name="android.intent.action.VIEW" /> 
+					<category android:name="android.intent.category.DEFAULT" />   
+					<category android:name="android.intent.category.BROWSABLE" />   
+					<data android:scheme="$CAPPTAIN_REDIRECT_URL" />  
+			</intent-filter>
+		</config-file>
+
+       <config-file target="AndroidManifest.xml" parent="/manifest">
+       		<uses-permission android:name="android.permission.INTERNET"/>
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+			<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+			<uses-permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" />
+			<permission android:name="$PACKAGE_NAME.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	 	</config-file>
+
+        <source-file src="src/android/Capptain.java" target-dir="src/com/del7a/capptain" />
+        <source-file src="src/android/capptain-sdk-android/capptain.jar"  target-dir="libs"/>
+        <source-file src="src/android/libs/android-support-v4.jar"  target-dir="libs"/>
+    
+       	<source-file src="src/android/capptain-sdk-android/res/drawable/capptain_close.png" target-dir="res/drawable" />
+		<source-file src="src/android/capptain-sdk-android/res/drawable/capptain_content_title.xml" target-dir="res/drawable" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_button_bar.xml" target-dir="res/layout" />
+       	<source-file src="src/android/capptain-sdk-android/res/layout/capptain_content_title.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_notification_area.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_notification_overlay.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_poll_choice.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_poll_question.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_poll.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_text_announcement.xml" target-dir="res/layout" />
+		<source-file src="src/android/capptain-sdk-android/res/layout/capptain_web_announcement.xml" target-dir="res/layout" />
+
+    </platform>
+   
+    <!-- ios -->
+    <platform name="ios">    
+    	<preference name="CAPPTAIN_IOS_SDK_KEY" />
+    	<preference name="CAPPTAIN_IOS_APP_ID" />
+		<preference name="CAPPTAIN_IOS_REACH_ICON" />
+		<preference name="CAPPTAIN_REDIRECT_URL" />
+		<preference name="CAPPTAIN_ENABLE_LOG" />
+
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="Capptain">
+                <param name="ios-package" value="Capptain" /> 
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="CapptainSDKKey">
+		    <string>$CAPPTAIN_IOS_SDK_KEY</string>
+		</config-file>
+
+        <config-file target="*-Info.plist" parent="CapptainEnableLog">
+		    <string>$CAPPTAIN_ENABLE_LOG</string>
+		</config-file>
+
+		 <config-file target="*-Info.plist" parent="CapptainAppId">
+		    <string>$CAPPTAIN_IOS_APP_ID</string>	   
+		</config-file>
+
+		 <config-file target="*-Info.plist" parent="CapptainReachIcon">
+		    <string>$CAPPTAIN_IOS_REACH_ICON</string>	   
+		</config-file>
+
+		 <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+			<array>
+				<dict>
+					<key>CFBundleTypeRole</key>
+					<string>None</string>
+					<key>CFBundleURLName</key>
+					<string>$PACKAGE_NAME.redirect</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>$CAPPTAIN_REDIRECT_URL</string>
+					</array>
+				</dict>
+			</array>
+		 </config-file >
+
+        <header-file src="src/ios/Capptain.h" />
+        <source-file src="src/ios/Capptain.m" />
+        <header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Classes/CPIdfaProvider.h" />
+        <source-file src="src/ios/capptain-sdk-ios/CapptainSDK/Classes/CPIdfaProvider.m" />
+
+	    
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CapptainAgent.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CapptainTableViewController.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CapptainViewController.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CPModule.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CPPushDelegate.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CPPushMessage.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CPStorage.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainSDK/Headers/CPTrackModule.h" />
+	   	
+	    <source-file src="src/ios/capptain-sdk-ios/CapptainReach/libreach.a" framework="true" />
+	    <source-file src="src/ios/capptain-sdk-ios/CapptainSDK/libcapptain.a" framework="true" />
+
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainReach/Headers/CPReachModule.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainReach/Headers/CPReachDataPushDelegate.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainReach/Headers/CPNotifier.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainReach/Headers/CPInteractiveContent.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainReach/Headers/CPReachContent.h" />
+	   	<header-file src="src/ios/capptain-sdk-ios/CapptainReach/Headers/CP_TBXML.h" />
+
+		<resource-file src="src/ios/capptain-sdk-ios/CapptainReach/res/close.png" />
+		<resource-file src="src/ios/capptain-sdk-ios/CapptainReach/res/CPDefaultAnnouncementView.xib" />
+		<resource-file src="src/ios/capptain-sdk-ios/CapptainReach/res/CPDefaultPollView.xib" />
+		<resource-file src="src/ios/capptain-sdk-ios/CapptainReach/res/CPNotificationView.xib" />
+
+  		<framework src="SystemConfiguration.framework" />
+  		<framework src="CoreTelephony.framework" />
+  		<framework src="CFNetwork.framework" />
+  		<framework src="CoreLocation.framework" />
+  		<framework src="AdSupport.framework" />
+  		<framework src="libxml2.dylib" />
+
+  	
+    </platform>
+
+</plugin>
