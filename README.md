@@ -73,7 +73,7 @@ Capptain.endActivity([ _success], [_failure]);
 ### Capptain.sendEvent
 Send an event  with the corresponding extra infos object.
 ```javascript
-sendEvent(_eventName, _extraInfos,[ _success], [_failure]);
+Capptain.sendEvent(_eventName, _extraInfos,[ _success], [_failure]);
 ```
 ##### Params
 * `_eventName`: the name of the event
