@@ -1,8 +1,8 @@
 /*
  * Copyright (c) Microsoft Corporation.  All rights reserved.
- * Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+ * Licensed under the MIT license. See License.txt in the project root for license information.
  */
-
+ 
 package com.del7a.capptain;
 
 import java.util.Iterator;
@@ -24,7 +24,7 @@ public class Capptain extends CordovaPlugin {
     private CordovaInterface cordova;
     private String previousActivityName = null;
     private String lastRedirect = null;
-	private final String pluginVersion = "1.0.3";
+	private final String pluginVersion = "1.0.4";
 
     public void initialize(CordovaInterface _cordova, CordovaWebView webView) {
 

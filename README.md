@@ -22,19 +22,19 @@ cordova plugin add capptain-cordova --variable KEY=<value>
 ```
 #### Generic Variables
 
-- `$CAPPTAIN_ENABLE_LOG` : `true`|`false`, enable both plugin and capptain native logs
-- `$CAPPTAIN_REDIRECT_URL` : the url schemes of your application when using redirect actions in your campaign. Must be the url prefix without :// (ex: `myapp` to handle urls such as `myapp://shop`)
+- `CAPPTAIN_ENABLE_LOG` : `true`|`false`, enable both plugin and capptain native logs
+- `CAPPTAIN_REDIRECT_URL` : the url schemes of your application when using redirect actions in your campaign. Must be the url prefix without :// (ex: `myapp` to handle urls such as `myapp://shop`)
 
 #### iOS Variables
-- `$CAPPTAIN_IOS_APP_ID` : the Capptain ID of your iOS application
-- `$CAPPTAIN_IOS_SDK_KEY` : the Capptain sdk key 
-- `$CAPPTAIN_IOS_REACH_ICON` : the icon used for reach notification : must be the name of the resource with its extension (ex: `icon.png`)
+- `CAPPTAIN_IOS_APP_ID` : the Capptain ID of your iOS application
+- `CAPPTAIN_IOS_SDK_KEY` : the Capptain sdk key 
+- `CAPPTAIN_IOS_REACH_ICON` : the icon used for reach notification : must be the name of the resource with its extension (ex: `icon.png`)
 
 
 #### Android Variables
-- `$CAPPTAIN_ANDROID_APP_ID` : the Capptain ID of your Android application
-- `$CAPPTAIN_ANDROID_REACH_ICON` : the icon used for reach notification : must be the name of the resource without any extension, nor drawable prefix  (ex: `icon`)
-- `$CAPPTAIN_GOOGLE_PROJECT_NUMBER` : the project number used as the GCM (Google Cloud Messaging) sender ID
+- `CAPPTAIN_ANDROID_APP_ID` : the Capptain ID of your Android application
+- `CAPPTAIN_ANDROID_REACH_ICON` : the icon used for reach notification : must be the name of the resource without any extension, nor drawable prefix  (ex: `icon`)
+- `CAPPTAIN_GOOGLE_PROJECT_NUMBER` : the project number used as the GCM (Google Cloud Messaging) sender ID
  
 To remove the plugin,
 ```sh
@@ -142,6 +142,9 @@ Capptain.getStatus( _statusCallback, [_failure]);
 
 History
 ----
+
+1.0.4
+* Updated Licence
 
 1.0.3
 * Fixed typos in the readme.md

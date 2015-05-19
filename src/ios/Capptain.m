@@ -1,8 +1,8 @@
 /*
  * Copyright (c) Microsoft Corporation.  All rights reserved.
- * Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+ * Licensed under the MIT license. See License.txt in the project root for license information.
  */
-
+ 
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include "Capptain.h"
@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-#define CAPPTAIN_PLUGIN_VERSION "1.0.3"
+#define CAPPTAIN_PLUGIN_VERSION "1.0.4"
 
 @implementation AppDelegate(Capptain)
 

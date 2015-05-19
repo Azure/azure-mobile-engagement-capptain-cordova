@@ -1,6 +1,6 @@
 {
   "name": "capptain-cordova",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Cordova plugin for Capptain",
   "cordova": {
     "id": "capptain-cordova",

@@ -1,12 +1,12 @@
 /*
  * Copyright (c) Microsoft Corporation.  All rights reserved.
- * Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+ * Licensed under the MIT license. See License.txt in the project root for license information.
  */
 
 module.exports = {
   
     pluginName : "Capptain",
-    pluginVersion : "1.0.3",
+    pluginVersion : "1.0.4",
 
     onOpenURL : function (_handler) {
       var _this = this;
