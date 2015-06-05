@@ -1,0 +1,25 @@
+{
+  "name": "capptain-cordova",
+  "version": "1.0.4",
+  "description": "Cordova plugin for Capptain",
+  "cordova": {
+    "id": "capptain-cordova",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/azure-mobile-engagement-capptain-cordova"
+  },
+  "keywords": [
+    "cordova",
+    "capptain",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Olivier Goguel",
+  "license": "Apache 2.0"
+}

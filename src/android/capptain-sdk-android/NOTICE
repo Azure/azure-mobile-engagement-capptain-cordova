@@ -1,0 +1,17 @@
+Capptain SDK for Android
+Copyright 2014 Capptain
+
+This software is released under the CAPPTAIN SDK LICENSE (see LICENSE-CAPPTAIN file).
+
+This software contains code derived from the Smack library (version 3.1.0) with custom patches,
+delivered in an obfuscated way (with code shrinking, code optimization and package renaming).
+Smack is released under the Apache License version 2 (see LICENSE-APACHE file).
+The original software is available at http://www.igniterealtime.org/projects/smack/
+
+This software contains an obfuscated version (with code shrinking, code optimization and package renaming) of the JZlib library.
+JZlib is released under BSD-style license (see LICENSE-JZLIB file).
+The original software is available at http://www.jcraft.com/jzlib/
+
+This sofware repackages Base64 code.
+Base64 is released under Public Domain.
+The original software is available at http://iharder.net/base64
