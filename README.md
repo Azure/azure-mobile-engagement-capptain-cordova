@@ -8,6 +8,8 @@ This plugin integrates the [Capptain SDK] into your Cordova/PhoneGap Application
 
 *Please refer to the Capptain SDK for more information about the various Capptain concepts*.
 
+## Note that this plugin is for the legacy Capptain product. You must refer to this - https://github.com/Azure/azure-mobile-engagement-cordova, if you are looking for a plugin to Azure Mobile Engagement. 
+
 Supported Platforms
 --
 * iOS
