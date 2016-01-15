@@ -54,7 +54,7 @@ Once the `deviceready` event has been triggered by the Cordova framework, a `Cap
 * Capptain.endJob
 * Capptain.sendEvent
 * Capptain.onOpenURL
-* Capptain.registerForRemoteNotification
+* Capptain.registerForPushNotification
 * Capptain.getStatus
 
 ### Capptain.startActivity
