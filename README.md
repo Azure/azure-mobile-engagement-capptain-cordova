@@ -1,4 +1,5 @@
-    
+# Azure Capptain / Mobile Engagement services have been retired and are no longer available.
+
 #Cordova plugin for Capptain
 ----
 
